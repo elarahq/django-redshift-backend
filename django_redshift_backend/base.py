@@ -466,9 +466,8 @@ class DatabaseSchemaEditor(BasePGDatabaseSchemaEditor):
         Provide options to create the table. Supports:
             - sortkey
         """
-        options = ['SORTKEY({})'.format(field) for field in model._meta.ordering]
-        if options:
-            return " " + " ".join(options)
+        if model._meta.ordering:
+            return " sortkey({})".format(",".join(model._meta.ordering))
         return ""
 
 
